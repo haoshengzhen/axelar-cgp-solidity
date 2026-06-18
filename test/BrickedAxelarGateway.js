@@ -68,6 +68,6 @@ describe('BrickedAxelarGateway', () => {
     });
 
     it('rejects native value (contract does not accept ETH)', async () => {
-        await expect(owner.sendTransaction({ to: bricked.address, value: 1 })).to.be.reverted;
+        await expectRevert((gasOptions) => owner.sendTransaction({ to: bricked.address, value: 1, ...gasOptions }), bricked, 'Bricked');
     });
 });
